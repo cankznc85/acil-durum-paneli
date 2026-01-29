@@ -2,94 +2,36 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeynep'e Özel 💙</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Zeynep'in Regl Destek Hattı 🚑</title>
     <style>
+        * { box-sizing: border-box; }
         body {
             background-color: #050a14;
-            font-family: sans-serif;
-            text-align: center;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
+            padding: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            color: #ffffff;
         }
-        .container {
+        .header { margin-top: 30px; text-align: center; }
+        h1 { color: #00d4ff; font-size: 32px; margin: 0; text-shadow: 0 0 10px #00d4ff; }
+        .subtitle { color: #8892b0; margin-top: 10px; font-size: 15px; }
+        
+        .button-container {
+            width: 100%;
             max-width: 400px;
-            width: 90%;
-            background: #0d1b2a;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            border: 1px solid #1b263b;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
         }
-        h1 { color: #00d4ff; font-size: 30px; margin-bottom: 10px; }
-        .subtitle { color: #8892b0; margin-bottom: 25px; font-size: 14px; }
-        .button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         button {
-            padding: 15px;
-            border: 1px solid #00d4ff;
-            border-radius: 10px;
-            background: transparent;
+            background: #0d1b2a;
+            border: 2px solid #00d4ff;
             color: #00d4ff;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 13px;
-        }
-        #display-area {
-            margin-top: 25px;
-            display: none;
-            padding: 15px;
-            background: #1b263b;
-            border-radius: 15px;
-        }
-        #resim { width: 100%; border-radius: 10px; display: block; margin-bottom: 10px; }
-        #emoji-fallback { font-size: 80px; display: none; margin-bottom: 10px; }
-        #metin { font-size: 17px; color: #ffffff; line-height: 1.5; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>Zeynep ✨</h1>
-    <p class="subtitle">Senin için buradayım sevgilim. Modunu seç:</p>
-    <div class="button-grid">
-        <button onclick="change('hormon')">Hormonlar 😤</button>
-        <button onclick="change('agri')">Ağrım Var 🤕</button>
-        <button onclick="change('sov')">Sövecek Yer 🌋</button>
-        <button onclick="change('iltifat')">İltifat 💖</button>
-    </div>
-    <div id="display-area">
-        <div id="emoji-fallback"></div>
-        <img id="resim" src="" alt="" onerror="this.style.display='none'; document.getElementById('emoji-fallback').style.display='block';">
-        <p id="metin"></p>
-    </div>
-</div>
-
-<script>
-    const data = {
-        hormon: {t: "Dünya haksız, Zeynep haklı! Kim canını sıktıysa söyle dövelim. ❤️", g: "https://media.tenor.com/71f-9I5_29sAAAAM/peach-goma.gif", e: "😤"},
-        agri: {t: "Sanal sıcak su torban ve çikolatan geldi sevgilim. Biraz dinlen. 🍫", g: "https://media.tenor.com/0fLgX4Y3XmAAAAAM/tkthao219-bubududu.gif", e: "🤕"},
-        sov: {t: "Hadi Zeynep, bütün hırsını buradan çıkar! Herkes gıcık bugün. 🌋", g: "https://media.tenor.com/Y_Y3F2Y9Y_YAAAAM/angry-cat.gif", e: "🌋"},
-        iltifat: {t: "Bu halde bile dünyanın en güzel kadınısın Zeynep. Seni seviyorum. 😍", g: "https://media.tenor.com/V2zX9X9X9X9AAAAM/love-cat.gif", e: "💖"}
-    };
-
-    function change(type) {
-        const area = document.getElementById('display-area');
-        const img = document.getElementById('resim');
-        const txt = document.getElementById('metin');
-        const emo = document.getElementById('emoji-fallback');
-        
-        area.style.display = 'block';
-        img.style.display = 'block';
-        emo.style.display = 'none';
-        
-        img.src = data[type].g;
-        txt.innerText = data[type].t;
-        emo.innerText = data[type].e;
-    }
-</script>
-</body>
-</html>
+            padding: 18px 10px;
+            border-
