@@ -3,104 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeynep'in Süper Mod Paneli 💙</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <title>Zeynep'e Özel 💙</title>
     <style>
         body {
-            background-color: #e0f7fa; /* Açık mavi */
-            font-family: 'Quicksand', sans-serif;
+            background-color: #050a14; /* Tam istediğin o derin koyu lacivert */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             text-align: center;
-            padding: 20px;
-            color: #4a6572; /* Koyu mavi gri */
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            color: #ffffff;
         }
         .container {
-            max-width: 480px;
+            max-width: 400px;
             width: 90%;
-            margin: auto;
-            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%); /* Hafif gradyanlı beyaz */
+            background: #0d1b2a; /* Panel rengi */
             padding: 30px;
-            border-radius: 40px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            border: 2px solid #b3e5fc; /* Açık mavi çerçeve */
-            transform: translateY(0);
-            transition: transform 0.5s ease-out;
-        }
-        .container:hover {
-            transform: translateY(-5px);
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            border: 1px solid #1b263b;
         }
         h1 {
-            font-family: 'Pacifico', cursive;
-            color: #03a9f4; /* Parlak mavi */
-            font-size: 38px;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-        p.subtitle {
-            font-size: 18px;
-            color: #2196f3; /* Orta mavi */
-            margin-bottom: 30px;
+            color: #00d4ff; /* Parlak beyaz-mavi arası ton */
+            font-size: 34px;
+            margin-bottom: 5px;
             font-weight: 700;
+        }
+        .subtitle {
+            color: #778da9;
+            font-size: 15px;
+            margin-bottom: 25px;
         }
         .button-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin-top: 20px;
         }
         button {
-            padding: 18px;
-            border: none;
-            border-radius: 25px;
-            background-color: #4fc3f7; /* Canlı mavi */
-            color: white;
+            padding: 16px;
+            border: 2px solid #00d4ff;
+            border-radius: 12px;
+            background: transparent;
+            color: #00d4ff;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 16px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            font-size: 14px;
         }
         button:hover {
-            background-color: #03a9f4; /* Koyu mavi */
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            background: rgba(0, 212, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        button:active {
+            transform: scale(0.95);
         }
         #display-area {
-            margin-top: 35px;
+            margin-top: 30px;
             display: none;
-            animation: fadeIn 0.8s ease-out;
-            background: #e1f5fe; /* Çok açık mavi arka plan */
-            padding: 20px;
-            border-radius: 25px;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: #1b263b;
+            border-radius: 15px;
+            animation: fadeIn 0.5s ease-out;
         }
         #display-area img {
-            max-width: 90%;
-            height: auto;
-            border-radius: 18px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            border: 3px solid #81d4fa; /* Resim çerçevesi */
-            transition: transform 0.3s ease;
-        }
-        #display-area img:hover {
-            transform: scale(1.02);
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         #metin {
-            font-size: 20px;
-            font-weight: 700;
-            color: #0288d1; /* Derin mavi */
-            line-height: 1.5;
-            min-height: 60px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            font-size: 18px;
+            color: #e0e1dd;
+            line-height: 1.6;
+            margin: 0;
+            font-weight: 500;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -108,18 +89,18 @@
 <body>
 
 <div class="container">
-    <h1>💙 Sevgili Zeynep'imin Mod Yükseltici Paneli 💙</h1>
-    <p class="subtitle">Senin için buradayım, bir tanem. Hangisine ihtiyacın var?</p>
+    <h1>Zeynep ✨</h1>
+    <p class="subtitle">Senin için buradayım sevgilim. Modunu seç:</p>
     
     <div class="button-grid">
-        <button onclick="change('hormon')">Hormonlar Coştu 😠</button>
-        <button onclick="change('agri')">Karnım Ağrıyor 🥺</button>
-        <button onclick="change('sov')">Herkese Gıcığım 😡</button>
-        <button onclick="change('iltifat')">Bana Özel Bir Şey Söyle 🥰</button>
+        <button onclick="change('hormon')">Hormonlar 😤</button>
+        <button onclick="change('agri')">Ağrım Var 🤕</button>
+        <button onclick="change('sov')">Sövecek Yer 🌋</button>
+        <button onclick="change('iltifat')">İltifat 💖</button>
     </div>
 
     <div id="display-area">
-        <img id="resim" src="" alt="Sana Özel Mesaj">
+        <img id="resim" src="" alt="Yükleniyor...">
         <p id="metin"></p>
     </div>
 </div>
@@ -127,20 +108,20 @@
 <script>
     const data = {
         hormon: [
-            {t: "Kim seni üzdüyse onunla dövüşmeye hazırım! Sen her zaman haklısın, Zeynep'im. Gel sarılalım. 🫂", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjU5azFmMGd3OW9lOXp1M2J3aGlrODg2dzJ2ZnQ2d2pzaWcxd3Y5ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3M4NpbLCTxBqU/giphy.gif"}, // Kızgın ama tatlı kedi
-            {t: "Dünya mı saçmaladı yine? Sen en güzelsin, en özelisin! Boşver onları. ❤️", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26hpKSUWID8766S7m/giphy.gif"} // Kucaklaşan kedi
+            {t: "Zeynep, şu an tüm dünya haksız, bir tek sen haklısın. Kim canını sıktıysa söyle halledelim! ❤️", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/vM86663X1xLSU/giphy.gif"},
+            {t: "Gel buraya, koca bir sarılma seni bekliyor. Kimse senden değerli değil. ✨", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3M4NpbLCTxBqU/giphy.gif"}
         ],
         agri: [
-            {t: "Sana sanal sıcak su torbası ve sınırsız çikolata gönderdim! Geçecek bir tanem, yanındayım. 🍫", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/14u1XU47HEDV9C/giphy.gif"}, // Battaniyeli köpek
-            {t: "Keşke ağrını alabilsem... Şimdilik bolca öpücük ve sevgi gönderiyorum sana. 💋", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbMvLUFmE/giphy.gif"} // Kalpli sevimli ayı
+            {t: "Sanal sıcak su torban ve en sevdiğin çikolata geldi! Biraz dinlen Zeynep'im. 🍫", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/14u1XU47HEDV9C/giphy.gif"},
+            {t: "Keşke acını alabilsem... Şimdilik bolca öpücük gönderiyorum sana sevgilim. ✨", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/MDJ9IbMvLUFmE/giphy.gif"}
         ],
         sov: [
-            {t: "İçindeki bütün öfkeyi bu tatlı yaratık senin yerine kussun! Hadi patlat bir küfür! 😂", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JIX9t2j0ZTN9S/giphy.gif"}, // Kızgın kedi bağırıyor
-            {t: "Herkese gıcık olmakta haklısın! Bu butona basınca rahatla, ben kimseye söylemem. 🤫", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9pXW1O78D47vO/giphy.gif"} // Çılgın kafa sallama
+            {t: "Hadi Zeynep, bütün hırsını buradan çıkar! Herkese gıcık olmakta haklısın. 🌋", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/9pXW1O78D47vO/giphy.gif"},
+            {t: "Bu kedi senin yerine her şeyi dağıtıyor şu an! Rahatla bir tanem. 😂", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/JIX9t2j0ZTN9S/giphy.gif"}
         ],
         iltifat: [
-            {t: "Benim güzel Zeynep'im, bu zor zamanlarda bile ne kadar güçlü olduğunu biliyor musun? Seni çok seviyorum! 💖", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/M90mJvCqx0aqT9rU04/giphy.gif"}, // Kalpli gözlü tatlı hayvan
-            {t: "Senin gülüşün bütün dünyayı aydınlatır, Zeynep. Ne olursa olsun hep yanındayım. ✨", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XGhDZjVw0tXfM7c6dK/giphy.gif"} // Parıldayan yıldızlar
+            {t: "Bu halde bile dünyanın en güzel kadınısın Zeynep. Seninle gurur duyuyorum. 😍", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/M90mJvCqx0aqT9rU04/giphy.gif"},
+            {t: "Senin bir gülüşün bana yetiyor. İyi ki varsın bir tanem. ✨", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/XGhDZjVw0tXfM7c6dK/giphy.gif"}
         ]
     };
 
