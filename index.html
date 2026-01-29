@@ -6,8 +6,8 @@
     <title>Zeynep'e Özel 💙</title>
     <style>
         body {
-            background-color: #050a14; /* Tam istediğin o derin koyu lacivert */
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #050a14;
+            font-family: sans-serif;
             text-align: center;
             margin: 0;
             display: flex;
@@ -19,71 +19,35 @@
         .container {
             max-width: 400px;
             width: 90%;
-            background: #0d1b2a; /* Panel rengi */
+            background: #0d1b2a;
             padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             border: 1px solid #1b263b;
         }
-        h1 {
-            color: #00d4ff; /* Parlak beyaz-mavi arası ton */
-            font-size: 34px;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-        .subtitle {
-            color: #778da9;
-            font-size: 15px;
-            margin-bottom: 25px;
-        }
-        .button-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
+        h1 { color: #00d4ff; font-size: 30px; margin-bottom: 10px; }
+        .subtitle { color: #8892b0; margin-bottom: 25px; font-size: 14px; }
+        .button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         button {
-            padding: 16px;
-            border: 2px solid #00d4ff;
-            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #00d4ff;
+            border-radius: 10px;
             background: transparent;
             color: #00d4ff;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-        }
-        button:hover {
-            background: rgba(0, 212, 255, 0.15);
-            transform: translateY(-2px);
-        }
-        button:active {
-            transform: scale(0.95);
+            font-size: 13px;
         }
         #display-area {
-            margin-top: 30px;
+            margin-top: 25px;
             display: none;
             padding: 15px;
             background: #1b263b;
             border-radius: 15px;
-            animation: fadeIn 0.5s ease-out;
         }
-        #display-area img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        #metin {
-            font-size: 18px;
-            color: #e0e1dd;
-            line-height: 1.6;
-            margin: 0;
-            font-weight: 500;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        #resim { width: 100%; border-radius: 10px; display: block; margin-bottom: 10px; }
+        #emoji-fallback { font-size: 80px; display: none; margin-bottom: 10px; }
+        #metin { font-size: 17px; color: #ffffff; line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -91,53 +55,41 @@
 <div class="container">
     <h1>Zeynep ✨</h1>
     <p class="subtitle">Senin için buradayım sevgilim. Modunu seç:</p>
-    
     <div class="button-grid">
         <button onclick="change('hormon')">Hormonlar 😤</button>
         <button onclick="change('agri')">Ağrım Var 🤕</button>
         <button onclick="change('sov')">Sövecek Yer 🌋</button>
         <button onclick="change('iltifat')">İltifat 💖</button>
     </div>
-
     <div id="display-area">
-        <img id="resim" src="" alt="Yükleniyor...">
+        <div id="emoji-fallback"></div>
+        <img id="resim" src="" alt="" onerror="this.style.display='none'; document.getElementById('emoji-fallback').style.display='block';">
         <p id="metin"></p>
     </div>
 </div>
 
 <script>
     const data = {
-        hormon: [
-            {t: "Zeynep, şu an tüm dünya haksız, bir tek sen haklısın. Kim canını sıktıysa söyle halledelim! ❤️", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/vM86663X1xLSU/giphy.gif"},
-            {t: "Gel buraya, koca bir sarılma seni bekliyor. Kimse senden değerli değil. ✨", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3M4NpbLCTxBqU/giphy.gif"}
-        ],
-        agri: [
-            {t: "Sanal sıcak su torban ve en sevdiğin çikolata geldi! Biraz dinlen Zeynep'im. 🍫", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/14u1XU47HEDV9C/giphy.gif"},
-            {t: "Keşke acını alabilsem... Şimdilik bolca öpücük gönderiyorum sana sevgilim. ✨", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/MDJ9IbMvLUFmE/giphy.gif"}
-        ],
-        sov: [
-            {t: "Hadi Zeynep, bütün hırsını buradan çıkar! Herkese gıcık olmakta haklısın. 🌋", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/9pXW1O78D47vO/giphy.gif"},
-            {t: "Bu kedi senin yerine her şeyi dağıtıyor şu an! Rahatla bir tanem. 😂", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/JIX9t2j0ZTN9S/giphy.gif"}
-        ],
-        iltifat: [
-            {t: "Bu halde bile dünyanın en güzel kadınısın Zeynep. Seninle gurur duyuyorum. 😍", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/M90mJvCqx0aqT9rU04/giphy.gif"},
-            {t: "Senin bir gülüşün bana yetiyor. İyi ki varsın bir tanem. ✨", g: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4M3V4M3V4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/XGhDZjVw0tXfM7c6dK/giphy.gif"}
-        ]
+        hormon: {t: "Dünya haksız, Zeynep haklı! Kim canını sıktıysa söyle dövelim. ❤️", g: "https://media.tenor.com/71f-9I5_29sAAAAM/peach-goma.gif", e: "😤"},
+        agri: {t: "Sanal sıcak su torban ve çikolatan geldi sevgilim. Biraz dinlen. 🍫", g: "https://media.tenor.com/0fLgX4Y3XmAAAAAM/tkthao219-bubududu.gif", e: "🤕"},
+        sov: {t: "Hadi Zeynep, bütün hırsını buradan çıkar! Herkes gıcık bugün. 🌋", g: "https://media.tenor.com/Y_Y3F2Y9Y_YAAAAM/angry-cat.gif", e: "🌋"},
+        iltifat: {t: "Bu halde bile dünyanın en güzel kadınısın Zeynep. Seni seviyorum. 😍", g: "https://media.tenor.com/V2zX9X9X9X9AAAAM/love-cat.gif", e: "💖"}
     };
 
     function change(type) {
         const area = document.getElementById('display-area');
         const img = document.getElementById('resim');
         const txt = document.getElementById('metin');
-        
-        const options = data[type];
-        const random = options[Math.floor(Math.random() * options.length)];
+        const emo = document.getElementById('emoji-fallback');
         
         area.style.display = 'block';
-        img.src = random.g;
-        txt.innerText = random.t;
+        img.style.display = 'block';
+        emo.style.display = 'none';
+        
+        img.src = data[type].g;
+        txt.innerText = data[type].t;
+        emo.innerText = data[type].e;
     }
 </script>
-
 </body>
 </html>
