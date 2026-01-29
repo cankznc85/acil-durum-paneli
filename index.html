@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeynep'in Süper Mod Paneli 💙</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e0f7fa; /* Açık mavi */
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            padding: 20px;
+            color: #4a6572; /* Koyu mavi gri */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 480px;
+            width: 90%;
+            margin: auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%); /* Hafif gradyanlı beyaz */
+            padding: 30px;
+            border-radius: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border: 2px solid #b3e5fc; /* Açık mavi çerçeve */
+            transform: translateY(0);
+            transition: transform 0.5s ease-out;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #03a9f4; /* Parlak mavi */
+            font-size: 38px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        p.subtitle {
+            font-size: 18px;
+            color: #2196f3; /* Orta mavi */
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 18px;
+            border: none;
+            border-radius: 25px;
+            background-color: #4fc3f7; /* Canlı mavi */
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            letter-spacing: 0.5px;
+        }
+        button:hover {
+            background-color: #03a9f4; /* Koyu mavi */
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        #display-area {
+            margin-top: 35px;
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+            background: #e1f5fe; /* Çok açık mavi arka plan */
+            padding: 20px;
+            border-radius: 25px;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+        }
+        #display-area img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border: 3px solid #81d4fa; /* Resim çerçevesi */
+            transition: transform 0.3s ease;
+        }
+        #display-area img:hover {
+            transform: scale(1.02);
+        }
+        #metin {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0288d1; /* Derin mavi */
+            line-height: 1.5;
+            min-height: 60px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>💙 Sevgili Zeynep'imin Mod Yükseltici Paneli 💙</h1>
+    <p class="subtitle">Senin için buradayım, bir tanem. Hangisine ihtiyacın var?</p>
+    
+    <div class="button-grid">
+        <button onclick="change('hormon')">Hormonlar Coştu 😠</button>
+        <button onclick="change('agri')">Karnım Ağrıyor 🥺</button>
+        <button onclick="change('sov')">Herkese Gıcığım 😡</button>
+        <button onclick="change('iltifat')">Bana Özel Bir Şey Söyle 🥰</button>
+    </div>
+
+    <div id="display-area">
+        <img id="resim" src="" alt="Sana Özel Mesaj">
+        <p id="metin"></p>
+    </div>
+</div>
+
+<script>
+    const data = {
+        hormon: [
+            {t: "Kim seni üzdüyse onunla dövüşmeye hazırım! Sen her zaman haklısın, Zeynep'im. Gel sarılalım. 🫂", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjU5azFmMGd3OW9lOXp1M2J3aGlrODg2dzJ2ZnQ2d2pzaWcxd3Y5ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3M4NpbLCTxBqU/giphy.gif"}, // Kızgın ama tatlı kedi
+            {t: "Dünya mı saçmaladı yine? Sen en güzelsin, en özelisin! Boşver onları. ❤️", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26hpKSUWID8766S7m/giphy.gif"} // Kucaklaşan kedi
+        ],
+        agri: [
+            {t: "Sana sanal sıcak su torbası ve sınırsız çikolata gönderdim! Geçecek bir tanem, yanındayım. 🍫", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/14u1XU47HEDV9C/giphy.gif"}, // Battaniyeli köpek
+            {t: "Keşke ağrını alabilsem... Şimdilik bolca öpücük ve sevgi gönderiyorum sana. 💋", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbMvLUFmE/giphy.gif"} // Kalpli sevimli ayı
+        ],
+        sov: [
+            {t: "İçindeki bütün öfkeyi bu tatlı yaratık senin yerine kussun! Hadi patlat bir küfür! 😂", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JIX9t2j0ZTN9S/giphy.gif"}, // Kızgın kedi bağırıyor
+            {t: "Herkese gıcık olmakta haklısın! Bu butona basınca rahatla, ben kimseye söylemem. 🤫", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9pXW1O78D47vO/giphy.gif"} // Çılgın kafa sallama
+        ],
+        iltifat: [
+            {t: "Benim güzel Zeynep'im, bu zor zamanlarda bile ne kadar güçlü olduğunu biliyor musun? Seni çok seviyorum! 💖", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/M90mJvCqx0aqT9rU04/giphy.gif"}, // Kalpli gözlü tatlı hayvan
+            {t: "Senin gülüşün bütün dünyayı aydınlatır, Zeynep. Ne olursa olsun hep yanındayım. ✨", g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2w5ajNrbjN6N2Q3bGJ2eXN5dGNsYjJic2lqeDhoMXV6aDFjMGp5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XGhDZjVw0tXfM7c6dK/giphy.gif"} // Parıldayan yıldızlar
+        ]
+    };
+
+    function change(type) {
+        const area = document.getElementById('display-area');
+        const img = document.getElementById('resim');
+        const txt = document.getElementById('metin');
+        
+        const options = data[type];
+        const random = options[Math.floor(Math.random() * options.length)];
+        
+        area.style.display = 'block';
+        img.src = random.g;
+        txt.innerText = random.t;
+    }
+</script>
+
+</body>
+</html>
