@@ -3,82 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeynep Destek Paneli 🚑</title>
+    <title>Zeynep Destek Paneli 💙</title>
     <style>
-        body { background-color: #050a14; color: white; font-family: sans-serif; text-align: center; padding: 20px; margin: 0; }
-        .box { max-width: 380px; margin: 20px auto; background: #0d1b2a; padding: 25px; border-radius: 20px; border: 2px solid #00d4ff; box-shadow: 0 0 20px rgba(0,212,255,0.2); }
-        h1 { color: #00d4ff; font-size: 28px; margin-bottom: 5px; }
-        .sub { color: #8892b0; font-size: 14px; margin-bottom: 20px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        button { background: #1b263b; color: #00d4ff; border: 1px solid #00d4ff; padding: 15px 5px; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 13px; }
-        button:active { background: #00d4ff; color: #050a14; }
+        body { background-color: #050a14; color: #e6f1ff; font-family: 'Segoe UI', Tahoma, sans-serif; text-align: center; padding: 20px; margin: 0; }
+        .box { max-width: 400px; margin: 20px auto; background: #0d1b2a; padding: 30px 20px; border-radius: 25px; border: 1px solid #1b263b; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+        h1 { color: #00d4ff; font-size: 32px; margin-bottom: 5px; letter-spacing: -1px; }
+        .sub { color: #8892b0; font-size: 14px; margin-bottom: 25px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        button { background: #162435; color: #00d4ff; border: 1px solid #00d4ff; padding: 18px 10px; border-radius: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 13px; }
+        button:active { transform: scale(0.9); background: #00d4ff; color: #050a14; }
         
-        /* Sonuç alanı her zaman orada, sadece içi değişecek */
-        #display-box { 
-            margin-top: 20px; 
-            min-height: 200px; 
-            background: #162435; 
-            border-radius: 15px; 
-            padding: 15px; 
-            border: 1px solid #415a77;
-        }
-        #gif-img { width: 100%; border-radius: 10px; display: none; margin-bottom: 10px; }
-        #msg-txt { font-size: 17px; line-height: 1.4; color: #e6f1ff; font-weight: 500; }
-        .start-msg { color: #415a77; padding-top: 80px; font-style: italic; }
+        #sonuc { margin-top: 30px; background: rgba(22, 36, 53, 0.6); padding: 20px; border-radius: 20px; border: 1px dashed #415a77; min-height: 250px; }
+        img { width: 100%; border-radius: 15px; display: none; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        #mesaj { font-size: 18px; line-height: 1.5; color: #ffffff; font-weight: 500; min-height: 50px; }
+        .hint { color: #415a77; font-size: 12px; margin-top: 10px; font-style: italic; }
     </style>
 </head>
 <body>
 
 <div class="box">
     <h1>Zeynep ✨</h1>
-    <p class="sub">Moral moduna göre butona bas kanka:</p>
+    <p class="sub">Yalnız değilsin kanka, bir mod seç:</p>
     
     <div class="grid">
-        <button onclick="yükle('hormon')">Dünya Saçma 😤</button>
-        <button onclick="yükle('agri')">Sancım Var 🤕</button>
-        <button onclick="yükle('sov')">Sövecek Yer 🌋</button>
-        <button onclick="yükle('moral')">Moral Ver 👊</button>
+        <button onclick="karistir('hormon')">Dünya Saçma 😤</button>
+        <button onclick="karistir('agri')">Sancım Var 🤕</button>
+        <button onclick="karistir('sov')">Sövecek Yer 🌋</button>
+        <button onclick="karistir('moral')">Moral Ver 👊</button>
     </div>
 
-    <div id="display-box">
-        <div id="placeholder" class="start-msg">Bir mod seç kanka...</div>
-        <img id="gif-img" src="" alt="Yükleniyor...">
-        <p id="msg-txt"></p>
+    <div id="sonuc">
+        <img id="resim" src="" alt="Yükleniyor...">
+        <p id="mesaj">Hangi modu seçersen o anki haline özel bir not çıkacak...</p>
+        <p class="hint">(Tekrar basarsan mesaj değişir!)</p>
     </div>
 </div>
 
 <script>
-    const veriler = {
+    const icerikler = {
         hormon: {
-            m: "Dünya haksız sen haklısın Zeynep kanka, takma kimseyi!",
-            g: "https://media.tenor.com/FjI9S6qVw0oAAAAC/cat-vibe.gif"
+            gif: "hormon.gif",
+            mesajlar: [
+                "Zeynep kanka, dünya haksız sen haklısın. Kim canını sıktıysa söyle gidip dükkanın önünü süpürelim!",
+                "Şu an herkes sana batıyor biliyorum ama sen kralsın, boşver hepsini geçecek kanka.",
+                "Hormonlar coşmuş olabilir ama senin asalet baki. Bugünlük bütün saçmalıklar benden sana muaf!",
+                "Zeynep, şu an birine kafa atmak istersen çok haklısın. Yanındayım, ilk yumruğu ben atarım!"
+            ]
         },
         agri: {
-            m: "Sanal sıcak su torbası ve çikolata stokları yolda. Dinlen kanka.",
-            g: "https://media.tenor.com/79_u2v07wOEAAAAC/milk-and-mocha-hug.gif"
+            gif: "agri.gif",
+            mesajlar: [
+                "Sanal sıcak su torban ve en sevdiğin çikolatalar yolda kanka. Biraz uzan, tadını çıkar.",
+                "O sancı senin gibi bir savaşçıyı yorabilir ama yıkamaz. Biraz dinlen kanka, dünya sensiz dönmüyor.",
+                "Keşke sancıyı Bluetooth ile kendime çekebilsem kanka. Sen sadece nefes al ve uyu, her şey hallolur.",
+                "Zeynep, şu an yatakta yuvarlanırken bile en cool kankamsın. Çikolata stokları benden!"
+            ]
         },
         sov: {
-            m: "Patlat bir küfür rahatla Zeynep, aramızda kalacak söz!",
-            g: "https://media.tenor.com/E8w-v8N0vAgAAAAC/cat-fight.gif"
+            gif: "sov.gif",
+            mesajlar: [
+                "İçinden geçen o bütün küfürleri ben de ediyorum şu an kanka. Bırak dışarı çıksınlar, rahatla!",
+                "Saydır kanka! Sövmek bazen en iyi ilaçtır. Aramızda kalacak, ben duymadım bile!",
+                "Zeynep, bugün senin 'herkese sövme' bayramın olsun. Kimse sana 'niye' diyemez, dedirtmem!",
+                "Sinirini içine atma kanka, patlat bir küfür! Sen rahatlamazsan dünya huzur bulmaz."
+            ]
         },
         moral: {
-            m: "Sen kralsın Zeynep, bu sancılar seni yıkamaz. Helal!",
-            g: "https://media.tenor.com/yFidrUOn0sAAAAAC/hugs-hugging.gif"
+            gif: "moral.gif",
+            mesajlar: [
+                "Zeynep, sen bu sancıyla bile hayata kafa tutan bir efsanesin. Helal olsun sana!",
+                "Unutma kanka; en sert fırtınalar en güçlü kaptanları yetiştirir. Sen en iyisisin!",
+                "Sadece hatırlatmak istedim: Çok değerlisin ve bu günler seni sadece daha güçlü yapacak.",
+                "Zeynep kanka, iyi ki varsın. Senin enerjin yeter, şu an biraz sönük olsa da yakında yine parlayacaksın!"
+            ]
         }
     };
 
-    function yükle(mod) {
-        // İlk mesajı gizle
-        document.getElementById('placeholder').style.display = 'none';
+    function karistir(mod) {
+        const alan = icerikler[mod];
+        const rastgeleMesaj = alan.mesajlar[Math.floor(Math.random() * alan.mesajlar.length)];
         
-        const resim = document.getElementById('gif-img');
-        const yazi = document.getElementById('msg-txt');
+        const img = document.getElementById('resim');
+        const txt = document.getElementById('mesaj');
         
-        resim.style.display = 'block';
-        resim.src = veriler[mod].g;
-        yazi.innerText = veriler[mod].m;
-        
-        // Ekranı aşağı kaydır
+        img.style.display = 'block';
+        img.src = "./" + alan.gif;
+        txt.innerText = rastgeleMesaj;
+
+        // Yumuşak kaydırma
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 </script>
