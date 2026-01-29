@@ -2,36 +2,80 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Zeynep'in Regl Destek Hattı 🚑</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeynep Destek Hattı 🚑</title>
     <style>
-        * { box-sizing: border-box; }
         body {
             background-color: #050a14;
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
             margin: 0;
-            padding: 20px;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
-        .header { margin-top: 30px; text-align: center; }
-        h1 { color: #00d4ff; font-size: 32px; margin: 0; text-shadow: 0 0 10px #00d4ff; }
-        .subtitle { color: #8892b0; margin-top: 10px; font-size: 15px; }
-        
-        .button-container {
-            width: 100%;
+        .container {
+            width: 90%;
             max-width: 400px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        button {
             background: #0d1b2a;
-            border: 2px solid #00d4ff;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #1b263b;
+            text-align: center;
+        }
+        h1 { color: #00d4ff; font-size: 28px; margin-bottom: 5px; text-shadow: 0 0 10px rgba(0,212,255,0.3); }
+        .sub { color: #8892b0; margin-bottom: 25px; font-size: 14px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        button {
+            background: transparent;
             color: #00d4ff;
-            padding: 18px 10px;
-            border-
+            border: 2px solid #00d4ff;
+            padding: 15px 5px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 13px;
+        }
+        button:active { background: rgba(0, 212, 255, 0.2); transform: scale(0.95); }
+        #display {
+            margin-top: 25px;
+            display: none;
+            background: #162435;
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid #415a77;
+            animation: fadeIn 0.4s ease-out;
+        }
+        #gif { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+        #txt { font-size: 16px; line-height: 1.5; color: #e6f1ff; margin: 0; font-weight: 500; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Zeynep ✨</h1>
+        <p class="sub">Moral moduna göre birine bas kanka.</p>
+        <div class="grid">
+            <button onclick="ac('hormon')">Dünya Saçma 😤</button>
+            <button onclick="ac('agri')">Sancım Var 🤕</button>
+            <button onclick="ac('sov')">Sövecek Yer 🌋</button>
+            <button onclick="ac('moral')">Moral Ver 👊</button>
+        </div>
+        <div id="display">
+            <img id="gif" src="" alt="Görsel Yükleniyor...">
+            <p id="txt"></p>
+        </div>
+    </div>
+
+    <script>
+        const ayarlar = {
+            hormon: {
+                t: "Dünya haksız sen haklısın Zeynep kanka, takma kimseyi!",
+                g: 'https://media.tenor.com/FjI9S6qVw0oAAAAC/cat-vibe.gif'
+            },
+            agri: {
+                t: "Sanal sıcak su torbası ve çikolata stokları yolda. Biraz uzan kanka.",
+                g: '
