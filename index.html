@@ -3,49 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeynep Destek</title>
+    <title>Zeynep Destek Hattı 🚑</title>
     <style>
-        body { background-color: #050a14; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-        .container { max-width: 350px; margin: auto; background: #0d1b2a; padding: 20px; border-radius: 15px; border: 1px solid #00d4ff; }
-        h1 { color: #00d4ff; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        button { background: #1b263b; color: #00d4ff; border: 1px solid #00d4ff; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; }
-        #sonuc { margin-top: 20px; display: none; background: #162435; padding: 15px; border-radius: 10px; }
-        img { width: 100%; border-radius: 10px; margin-bottom: 10px; }
+        body { background-color: #050a14; color: white; font-family: sans-serif; text-align: center; padding: 20px; margin: 0; }
+        .container { max-width: 380px; margin: 40px auto; background: #0d1b2a; padding: 25px; border-radius: 20px; border: 2px solid #00d4ff; box-shadow: 0 0 20px rgba(0,212,255,0.2); }
+        h1 { color: #00d4ff; margin-bottom: 5px; }
+        .sub { color: #8892b0; font-size: 14px; margin-bottom: 25px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        button { background: #1b263b; color: #00d4ff; border: 1px solid #00d4ff; padding: 18px 5px; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 13px; }
+        button:active { background: #00d4ff; color: #050a14; }
+        
+        /* Sonuç Alanı */
+        #sonuc { margin-top: 25px; display: none; background: #162435; padding: 15px; border-radius: 15px; border: 1px solid #415a77; }
+        #resim { width: 100%; border-radius: 10px; display: block; min-height: 150px; background: #050a14; }
+        #metin { margin-top: 15px; font-size: 17px; line-height: 1.4; color: #e6f1ff; font-weight: 500; }
+        .emoji-alt { font-size: 60px; display: block; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Zeynep ✨</h1>
-    <p>Modunu seç kanka:</p>
+    <p class="sub">Moral moduna göre birine bas kanka.</p>
+    
     <div class="grid">
-        <button onclick="tikla('hormon')">Hormonlar 😤</button>
-        <button onclick="tikla('agri')">Sancım Var 🤕</button>
-        <button onclick="tikla('sov')">Sövecek Yer 🌋</button>
-        <button onclick="tikla('moral')">Moral Ver 👊</button>
+        <button onclick="calistir('hormon')">Dünya Saçma 😤</button>
+        <button onclick="calistir('agri')">Sancım Var 🤕</button>
+        <button onclick="calistir('sov')">Sövecek Yer 🌋</button>
+        <button onclick="calistir('moral')">Moral Ver 👊</button>
     </div>
 
     <div id="sonuc">
-        <img id="resim" src="" alt="Yükleniyor...">
+        <span id="emoji-goster" class="emoji-alt"></span>
+        <img id="resim" src="" alt="Yükleniyor..." onerror="this.style.display='none'">
         <p id="metin"></p>
     </div>
 </div>
 
 <script>
-    const data = {
-        hormon: { t: "Dünya haksız sen haklısın Zeynep kanka!", g: "https://media.tenor.com/FjI9S6qVw0oAAAAC/cat-vibe.gif" },
-        agri: { t: "Sıcak su torbası ve çikolatalar yolda!", g: "https://media.tenor.com/79_u2v07wOEAAAAC/milk-and-mocha-hug.gif" },
-        sov: { t: "Patlat bir küfür rahatla Zeynep!", g: "https://media.tenor.com/E8w-v8N0vAgAAAAC/cat-fight.gif" },
-        moral: { t: "Sen kralsın Zeynep, helal olsun!", g: "https://media.tenor.com/yFidrUOn0sAAAAAC/hugs-hugging.gif" }
+    const veriler = {
+        hormon: {
+            t: "Dünya haksız sen haklısın Zeynep kanka, takma kimseyi!",
+            e: "😤",
+            g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4JmN0PWc/vM86663X1xLSU/giphy.gif"
+        },
+        agri: {
+            t: "Sanal sıcak su torbası ve çikolata stokları yolda!",
+            e: "🤒",
+            g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4JmN0PWc/14u1XU47HEDV9C/giphy.gif"
+        },
+        sov: {
+            t: "Patlat bir küfür rahatla Zeynep, aramızda kalacak!",
+            e: "🌋",
+            g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4JmN0PWc/9pXW1O78D47vO/giphy.gif"
+        },
+        moral: {
+            t: "Sen kralsın Zeynep, bu sancılar seni yıkamaz. Helal!",
+            e: "👊",
+            g: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4M3V4M3V4M3V4JmN0PWc/M90mJvCqx0aqT9rU04/giphy.gif"
+        }
     };
 
-    function tikla(mod) {
-        document.getElementById('sonuc').style.display = 'block';
-        document.getElementById('metin').innerText = data[mod].t;
-        document.getElementById('resim').src = data[mod].g;
-    }
-</script>
+    function calistir(mod) {
+        const kutu = document.getElementById('sonuc');
+        const img = document.getElementById('resim');
+        const txt = document.getElementById('metin');
+        const emo = document.getElementById('emoji-goster');
 
-</body>
-</html>
+        kutu.style.display = 'block';
