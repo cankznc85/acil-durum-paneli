@@ -3,94 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeynep İçin ✨</title>
+    <title>Zeynep ✨</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        body { background-color: #050a14; color: #e6f1ff; font-family: 'Segoe UI', Tahoma, sans-serif; text-align: center; padding: 20px; margin: 0; }
-        .box { max-width: 400px; margin: 20px auto; background: #0d1b2a; padding: 30px 20px; border-radius: 25px; border: 1px solid #1b263b; box-shadow: 0 15px 35px rgba(0,212,255,0.1); }
-        h1 { color: #00d4ff; font-size: 32px; margin-bottom: 5px; letter-spacing: -1px; }
-        .sub { color: #8892b0; font-size: 14px; margin-bottom: 25px; }
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@1,600&display=swap');
+
+        :root {
+            --accent: #ff4d6d;
+            --glass: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.15);
+        }
+
+        body {
+            background: #0b0e14;
+            background: radial-gradient(circle at top right, #1a1e2e, #0b0e14);
+            color: #f8f9fa;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        #waiting-screen { margin-top: 20vh; animation: fadeIn 1.5s ease; cursor: pointer; }
+        .mic-icon { font-size: 70px; margin-bottom: 20px; filter: drop-shadow(0 0 20px var(--accent)); animation: pulse 2s infinite; display: inline-block; }
+
+        #main-content {
+            display: none;
+            max-width: 420px;
+            margin: 20px auto;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px 25px;
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.4);
+            animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .live-counter {
+            background: rgba(255, 77, 109, 0.12);
+            padding: 20px 10px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 77, 109, 0.2);
+        }
+        .counter-numbers {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffb3c1;
+            display: block;
+            letter-spacing: 2px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .counter-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-top: 5px;
+            display: block;
+        }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: 38px; margin: 0; color: white; }
+        .sub { font-size: 13px; color: #adb5bd; margin-bottom: 30px; }
+
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        button { background: #162435; color: #00d4ff; border: 1px solid #00d4ff; padding: 18px 10px; border-radius: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 13px; }
-        button:active { transform: scale(0.95); background: #00d4ff; color: #050a14; }
-        
-        #sonuc { margin-top: 30px; background: rgba(22, 36, 53, 0.4); padding: 20px; border-radius: 20px; border: 1px solid #1b263b; min-height: 250px; }
-        img { width: 100%; border-radius: 15px; display: none; margin-bottom: 15px; }
-        #mesaj { font-size: 17px; line-height: 1.5; color: #ffffff; font-weight: 500; }
+        button.action-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid var(--border);
+            padding: 18px 10px;
+            border-radius: 22px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+        button.action-btn:hover { background: var(--accent); transform: translateY(-3px); }
+
+        #sonuc { margin-top: 30px; background: rgba(0, 0, 0, 0.2); padding: 20px; border-radius: 25px; min-height: 260px; }
+        img { width: 100%; border-radius: 20px; display: none; margin-bottom: 20px; }
+        #mesaj { font-size: 15px; color: #e9ecef; }
+
+        .ask-section { margin-top: 40px; padding-top: 25px; border-top: 1px solid var(--border); position: relative; min-height: 160px; }
+        .evet-btn { background: #27ae60; color: white; border: none; padding: 12px 30px; border-radius: 15px; font-weight: 600; position: absolute; left: 15%; cursor: pointer; }
+        #noBtn { background: rgba(255, 255, 255, 0.1); color: var(--accent); border: 1px solid var(--accent); padding: 12px 30px; border-radius: 15px; font-weight: 600; position: absolute; left: 55%; transition: 0.15s; cursor: pointer; }
+
+        .heart { position: fixed; font-size: 25px; animation: floatUp 2s ease-out forwards; pointer-events: none; z-index: 999; }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes floatUp { from { transform: translateY(0) scale(1); opacity: 1; } to { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body>
+<body onclick="createHeart(event)">
 
-<div class="box">
-    <h1>Zeynep ✨</h1>
-    <p class="sub">Hangi moddaysan yanındayım, seç bakalım:</p>
+<div id="waiting-screen" onclick="startRecognition()">
+    <span class="mic-icon">🎙️</span>
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 28px;">Zeynep, Hazır mısın?</h2>
+    <p style="font-weight: 300; opacity: 0.7;">Tıkla ve "Seviyorum seni" de...</p>
+</div>
+
+<div id="main-content">
+    <div class="live-counter">
+        <span class="counter-numbers" id="clock">21 GÜN 00:00:00</span>
+        <span class="counter-label">Seni sevdiğim her an bir ömre bedel...</span>
+    </div>
+
+    <h1>Zeynep</h1>
+    <p class="sub">Senin için buradayım...</p>
     
     <div class="grid">
-        <button onclick="karistir('hormon')">Hormonlar 😤</button>
-        <button onclick="karistir('agri')">Sancım Var 🤕</button>
-        <button onclick="karistir('sov')">Sövecek Yer 🌋</button>
-        <button onclick="karistir('moral')">Moral Ver 👊</button>
+        <button class="action-btn" onclick="karistir('hormon')">Nazlıyım 😤</button>
+        <button class="action-btn" onclick="karistir('agri')">Sancım Var 🤕</button>
+        <button class="action-btn" onclick="karistir('sov')">Sövecek Yer 🌋</button>
+        <button class="action-btn" onclick="karistir('moral')">İlgi Ver 🥰</button>
+        <button class="action-btn" onclick="falBak()" style="grid-column: span 2; background: rgba(255,77,109,0.1);">Günün Falı 🔮</button>
     </div>
 
     <div id="sonuc">
-        <img id="resim" src="" alt="Yükleniyor...">
-        <p id="mesaj">Modunu seç, sana özel bir not bırakacağım...</p>
+        <img id="resim" src="" alt="Zeynep ✨">
+        <p id="mesaj">Zeynep, senin mutluluğun benim huzurum...</p>
+    </div>
+
+    <div class="ask-section" id="askSection">
+        <p style="font-weight: 600;">Beni hiç bırakmayacaksın değil mi? 🥺</p>
+        <div style="position: relative; height: 60px; margin-top: 15px;">
+            <button class="evet-btn" onclick="tebrikler()">EVET</button>
+            <button id="noBtn" onmouseover="kac()" ontouchstart="kac()">HAYIR</button>
+        </div>
     </div>
 </div>
 
 <script>
-    const icerikler = {
-        hormon: {
-            gif: "kimoooooooon.gif",
-            mesajlar: [
-                "Bütün dünya birleşip seni kızdırmaya mı çalışıyor? Hiç merak etme, ben senin tarafındayım. ✨",
-                "Şu an sinirli olman bile seni o kadar tatlı yapıyor ki... Ama istersen beraber birilerine sövebiliriz!",
-                "Hormonlar gelip geçer ama benim sana olan desteğim baki. Sakinleşene kadar buradayım.",
-                "Seni kızdıran her neyse söyle, hemen bulutları dağıtalım. Sen sadece gülümse yeter."
-            ]
-        },
-        agri: {
-            gif: "puppy-curling-in-blanket.gif",
-            mesajlar: [
-                "Keşke şu sancıyı sihirli bir değnekle çekip alabilsem... Şimdilik sadece uzan ve dinlen, aklım sende.",
-                "Sana en yumuşak battaniyeleri ve en lezzetli çikolataları sanal da olsa gönderiyorum. Çabuk iyileş.",
-                "Dinlenirken beni düşünürsen belki ağrın biraz azalır? Şaka bir yana, yanındayım, bir şeye ihtiyacın olursa buradayım.",
-                "Zeynep, şu an pamuklara sarılıp uyuman lazım. Sen değerlisin, kendini fazla yorma olur mu?"
-            ]
-        },
-        sov: {
-            gif: "potz-content-potz.gif",
-            mesajlar: [
-                "İçini dök bakalım... Kim seni bu kadar darladı? Beraber saydıralım, rahatla istersen. 🔥",
-                "Sen söv, ben dinlerim. Hatta istersen senin yerine ben bile kızabilirim onlara!",
-                "Zeynep, sinirini içine atma. Patlat bir küfür, ben duymadım sayarım ama seni çok iyi anlarım.",
-                "Şu an dünyayı yakmak istiyorsan, kibriti ben çakabilirim. Sen yeter ki rahatla."
-            ]
-        },
-        moral: {
-            gif: "moral-monkey-veefriends.gif",
-            mesajlar: [
-                "Sadece şunu bil: Günün nasıl geçerse geçsin, seni düşünen biri var burada. 💙",
-                "Senin enerjin dünyaya yeter. Biraz modun düşmüş olabilir ama parlaman çok yakındır, hissediyorum.",
-                "Bu mesajı okuyorsan gülümsemeni istiyorum, çünkü o gülüş her şeyi güzelleştiriyor.",
-                "Zeynep, ne kadar güçlü olduğunu biliyorum ama bazen sadece yaslanıp dinlenmek de güzeldir. Ben buradayım."
-            ]
+    // --- 21 GÜN CANLI SAYAÇ MANTIĞI ---
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 21);
+    startDate.setHours(0, 0, 0, 0);
+
+    function updateClock() {
+        const now = new Date();
+        const diff = now - startDate;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diff / (1000 * 60)) % 60);
+        const secs = Math.floor((diff / 1000) % 60);
+        const h = hours < 10 ? "0" + hours : hours;
+        const m = mins < 10 ? "0" + mins : mins;
+        const s = secs < 10 ? "0" + secs : secs;
+        document.getElementById('clock').innerText = `${days} GÜN ${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'tr-TR';
+
+    function startRecognition() {
+        try { recognition.start(); } catch(e){}
+    }
+
+    recognition.onresult = (event) => {
+        const text = event.results[0][0].transcript.toLowerCase();
+        if (text.includes("seviyorum seni") || text.includes("seni seviyorum")) {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            document.getElementById('waiting-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
         }
+    };
+
+    const icerikler = {
+        hormon: { gif: "kimoooooooon.gif", mesajlar: ["Zeynep, o sinirli halini bile çok seviyorum..."] },
+        agri: { gif: "puppy-curling-in-blanket.gif", mesajlar: ["Kıyamam sana, keşke ağrını alabilsem..."] },
+        sov: { gif: "potz-content-potz.gif", mesajlar: ["Söv bebeğim, beraber rahatlayalım! 🔥"] },
+        moral: { gif: "moral-monkey-veefriends.gif", mesajlar: ["Sen gülünce dünya güzelleşiyor Zeynep. ❤️"] }
     };
 
     function karistir(mod) {
         const alan = icerikler[mod];
-        const rastgeleMesaj = alan.mesajlar[Math.floor(Math.random() * alan.mesajlar.length)];
-        
         const img = document.getElementById('resim');
-        const txt = document.getElementById('mesaj');
-        
-        img.style.display = 'block';
-        img.src = "./" + alan.gif;
-        txt.innerText = rastgeleMesaj;
+        img.style.display = 'block'; img.src = "./" + alan.gif;
+        document.getElementById('mesaj').innerText = alan.mesajlar[Math.floor(Math.random() * alan.mesajlar.length)];
+    }
 
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    function falBak() {
+        const fallar = ["Gülüşün birinin ömrünü uzatıyor!", "Bugün şansın Zeynep kadar açık!", "Seni çok seven biri şu an seni düşünüyor..."];
+        alert("🔮 Falın:\n\n" + fallar[Math.floor(Math.random()*fallar.length)]);
+    }
+
+    function kac() {
+        const btn = document.getElementById('noBtn');
+        const container = document.getElementById('askSection');
+        btn.style.left = Math.floor(Math.random() * (container.clientWidth - 80)) + 'px';
+        btn.style.top = Math.floor(Math.random() * (container.clientHeight - 50)) + 'px';
+    }
+
+    function createHeart(e) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart'); heart.innerHTML = '❤️';
+        heart.style.left = e.clientX + 'px'; heart.style.top = e.clientY + 'px';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+    }
+
+    function tebrikler() {
+        confetti({ particleCount: 200, spread: 100 });
+        alert("Zeynep... Her saniye seni daha çok seveceğim! ❤️");
     }
 </script>
-
 </body>
 </html>
