@@ -88,14 +88,15 @@
         #mesaj { font-size: 15px; color: #e9ecef; }
 
         .ask-section { margin-top: 40px; padding-top: 25px; border-top: 1px solid var(--border); position: relative; min-height: 160px; }
-        .evet-btn { background: #27ae60; color: white; border: none; padding: 12px 30px; border-radius: 15px; font-weight: 600; position: absolute; left: 15%; cursor: pointer; }
-        #noBtn { background: rgba(255, 255, 255, 0.1); color: var(--accent); border: 1px solid var(--accent); padding: 12px 30px; border-radius: 15px; font-weight: 600; position: absolute; left: 55%; transition: 0.15s; cursor: pointer; }
+        .evet-btn { background: #27ae60; color: white; border: none; padding: 12px 30px; border-radius: 15px; font-weight: 600; position: absolute; left: 15%; cursor: pointer; z-index: 10; }
+        #noBtn { background: rgba(255, 255, 255, 0.1); color: var(--accent); border: 1px solid var(--accent); padding: 12px 30px; border-radius: 15px; font-weight: 600; position: absolute; left: 55%; transition: 0.15s; cursor: pointer; z-index: 10; }
 
         .heart { position: fixed; font-size: 25px; animation: floatUp 2s ease-out forwards; pointer-events: none; z-index: 999; }
 
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
         @keyframes floatUp { from { transform: translateY(0) scale(1); opacity: 1; } to { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body onclick="createHeart(event)">
@@ -104,11 +105,12 @@
     <span class="mic-icon">🎙️</span>
     <h2 style="font-family: 'Playfair Display', serif; font-size: 28px;">Zeynep, Hazır mısın?</h2>
     <p style="font-weight: 300; opacity: 0.7;">Tıkla ve "Seviyorum seni" de...</p>
+    <p style="font-size: 10px; opacity: 0.4; margin-top: 20px;">(Sesli söyleyemezsen ekrana çift tıkla)</p>
 </div>
 
 <div id="main-content">
     <div class="live-counter">
-        <span class="counter-numbers" id="clock">21 GÜN 00:00:00</span>
+        <span class="counter-numbers" id="clock">YÜKLENİYOR...</span>
         <span class="counter-label">Seni sevdiğim her an bir ömre bedel...</span>
     </div>
 
@@ -130,7 +132,7 @@
 
     <div class="ask-section" id="askSection">
         <p style="font-weight: 600;">Beni hiç bırakmayacaksın değil mi? 🥺</p>
-        <div style="position: relative; height: 60px; margin-top: 15px;">
+        <div style="position: relative; height: 80px; margin-top: 15px;">
             <button class="evet-btn" onclick="tebrikler()">EVET</button>
             <button id="noBtn" onmouseover="kac()" ontouchstart="kac()">HAYIR</button>
         </div>
@@ -138,79 +140,109 @@
 </div>
 
 <script>
-    // --- 21 GÜN CANLI SAYAÇ MANTIĞI ---
-    const startDate = new Date();
-    startDate.setDate(startDate.getDate() - 21);
-    startDate.setHours(0, 0, 0, 0);
+    // --- ÖZEL BAŞLANGIÇ TARİHİ: 4 OCAK 2026 ---
+    const startDate = new Date('2026-01-04T00:00:00');
 
     function updateClock() {
         const now = new Date();
         const diff = now - startDate;
+        
+        if (diff < 0) {
+            document.getElementById('clock').innerText = "BAŞLAMASINA AZ KALDI";
+            return;
+        }
+
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const mins = Math.floor((diff / (1000 * 60)) % 60);
         const secs = Math.floor((diff / 1000) % 60);
+        
         const h = hours < 10 ? "0" + hours : hours;
         const m = mins < 10 ? "0" + mins : mins;
         const s = secs < 10 ? "0" + secs : secs;
+        
         document.getElementById('clock').innerText = `${days} GÜN ${h}:${m}:${s}`;
     }
     setInterval(updateClock, 1000);
     updateClock();
 
+    // Ses Tanıma
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = 'tr-TR';
 
     function startRecognition() {
-        try { recognition.start(); } catch(e){}
+        try { recognition.start(); } catch(e){
+            // Tarayıcı desteklemiyorsa veya hata verirse direkt aç
+            showMain();
+        }
     }
 
     recognition.onresult = (event) => {
         const text = event.results[0][0].transcript.toLowerCase();
-        if (text.includes("seviyorum seni") || text.includes("seni seviyorum")) {
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            document.getElementById('waiting-screen').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
+        if (text.includes("seviyorum") || text.includes("zeynep")) {
+            showMain();
         }
     };
 
+    // Yedek giriş metodu (Çift tıklama)
+    window.addEventListener('dblclick', () => {
+        if(document.getElementById('main-content').style.display !== 'block') showMain();
+    });
+
+    function showMain() {
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        document.getElementById('waiting-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+    }
+
     const icerikler = {
-        hormon: { gif: "kimoooooooon.gif", mesajlar: ["Zeynep, o sinirli halini bile çok seviyorum..."] },
-        agri: { gif: "puppy-curling-in-blanket.gif", mesajlar: ["Kıyamam sana, keşke ağrını alabilsem..."] },
-        sov: { gif: "potz-content-potz.gif", mesajlar: ["Söv bebeğim, beraber rahatlayalım! 🔥"] },
-        moral: { gif: "moral-monkey-veefriends.gif", mesajlar: ["Sen gülünce dünya güzelleşiyor Zeynep. ❤️"] }
+        hormon: { gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJtZzZ5NXF6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/OPU6wUKARA8AU/giphy.gif", mesajlar: ["Zeynep, o sinirli halini bile çok seviyorum... Her halinle benimsin."] },
+        agri: { gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJtZzZ5NXF6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3M4NpbLCTxBqU/giphy.gif", mesajlar: ["Kıyamam sana, keşke ağrını alabilsem... Uzan ve dinlen bebeğim."] },
+        sov: { gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJtZzZ5NXF6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/11tVV6KzAl_Y0E/giphy.gif", mesajlar: ["Söv bebeğim, beraber rahatlayalım! İçinde ne varsa dök! 🔥"] },
+        moral: { gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJtZzZ5NXF6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6ZzV6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/k9Jw0MW9TV6DbewYXW/giphy.gif", mesajlar: ["Sen gülünce dünya güzelleşiyor Zeynep. Sen benim her şeyimsin. ❤️"] }
     };
 
     function karistir(mod) {
         const alan = icerikler[mod];
         const img = document.getElementById('resim');
-        img.style.display = 'block'; img.src = "./" + alan.gif;
+        img.style.display = 'block'; 
+        img.src = alan.gif;
         document.getElementById('mesaj').innerText = alan.mesajlar[Math.floor(Math.random() * alan.mesajlar.length)];
     }
 
     function falBak() {
-        const fallar = ["Gülüşün birinin ömrünü uzatıyor!", "Bugün şansın Zeynep kadar açık!", "Seni çok seven biri şu an seni düşünüyor..."];
+        const fallar = ["Gülüşün birinin ömrünü uzatıyor!", "Bugün şansın Zeynep kadar açık!", "Seni çok seven biri şu an sadece seni düşünüyor... ✨"];
         alert("🔮 Falın:\n\n" + fallar[Math.floor(Math.random()*fallar.length)]);
     }
 
     function kac() {
         const btn = document.getElementById('noBtn');
         const container = document.getElementById('askSection');
-        btn.style.left = Math.floor(Math.random() * (container.clientWidth - 80)) + 'px';
-        btn.style.top = Math.floor(Math.random() * (container.clientHeight - 50)) + 'px';
+        
+        const maxX = container.clientWidth - btn.offsetWidth;
+        const maxY = container.clientHeight - btn.offsetHeight;
+        
+        const randomX = Math.max(0, Math.floor(Math.random() * maxX));
+        const randomY = Math.max(0, Math.floor(Math.random() * maxY));
+        
+        btn.style.left = randomX + 'px';
+        btn.style.top = randomY + 'px';
     }
 
     function createHeart(e) {
+        const symbols = ['❤️', '✨', '🌸', '🧸', '☁️'];
         const heart = document.createElement('div');
-        heart.classList.add('heart'); heart.innerHTML = '❤️';
-        heart.style.left = e.clientX + 'px'; heart.style.top = e.clientY + 'px';
+        heart.classList.add('heart');
+        heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+        heart.style.left = e.clientX + 'px';
+        heart.style.top = e.clientY + 'px';
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 2000);
     }
 
     function tebrikler() {
         confetti({ particleCount: 200, spread: 100 });
-        alert("Zeynep... Her saniye seni daha çok seveceğim! ❤️");
+        alert("Zeynep... Biliyordum! Her saniye seni daha çok seveceğim! ❤️");
     }
 </script>
 </body>
